@@ -64,6 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "howTallAreYou":
             MessageLookupByLibrary.simpleMessage("How tall are you?"),
         "languages": MessageLookupByLibrary.simpleMessage("Languages"),
+        "letStart": MessageLookupByLibrary.simpleMessage("Let\'s start"),
         "lightTheme": MessageLookupByLibrary.simpleMessage("Light theme"),
         "lockAndSecurity":
             MessageLookupByLibrary.simpleMessage("Lock and Security"),
@@ -82,6 +83,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "orContinue": MessageLookupByLibrary.simpleMessage("Or continue with"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone number"),
+        "previous": MessageLookupByLibrary.simpleMessage("Previous"),
         "prompt1": MessageLookupByLibrary.simpleMessage(
             "I\'m just starting out with my fitness journey and would like a suitable workout plan based on my goals and fitness level. Can you help me create an effective fitness routine?"),
         "prompt10": MessageLookupByLibrary.simpleMessage(

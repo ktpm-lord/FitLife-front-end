@@ -6,14 +6,25 @@ import 'package:fit_life/mvvm/ui/onboarding/views/widgets/onboarding_step_layout
 
 class SelectGenderScreen extends StatefulWidget {
   final Function(bool)? genderChange;
-  const SelectGenderScreen({super.key, this.genderChange});
+  final bool? isMale;
+  const SelectGenderScreen({
+    super.key,
+    this.genderChange,
+    this.isMale,
+  });
 
   @override
   State<SelectGenderScreen> createState() => _SelectGenderScreenState();
 }
 
 class _SelectGenderScreenState extends State<SelectGenderScreen> {
-  bool isMale = true;
+  late bool isMale;
+
+  @override
+  void initState() {
+    isMale = widget.isMale ?? true;
+    super.initState();
+  }
 
   Widget renderGenderBoxWidget({
     required String imageUrl,

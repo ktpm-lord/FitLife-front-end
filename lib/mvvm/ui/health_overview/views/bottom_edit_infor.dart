@@ -1,4 +1,5 @@
 import 'package:fit_life/app_coordinator.dart';
+import 'package:fit_life/core/components/enum/duration_exercise.dart';
 import 'package:fit_life/core/components/extensions/context_extensions.dart';
 import 'package:fit_life/core/components/widgets/button_custom.dart';
 import 'package:fit_life/core/components/widgets/fit_life/divider_dot.dart';
@@ -73,12 +74,13 @@ class _BottomEditInformationState extends State<BottomEditInformation> {
                     padding: const EdgeInsets.symmetric(horizontal: 15.0),
                     child: switch (widget.type) {
                       HealthOverviewRow.duration => SelectDurationScreen(
-                          onChange: (d) => data = d.toString(),
+                          onChange: (d) =>
+                              data = DurationExercise.values[d].name,
                         ),
                       HealthOverviewRow.weight => GetWeightScreen(
                           onChange: (d) => data = d.toInt(),
                         ),
-                      HealthOverviewRow.height => GetHeightStep(
+                      HealthOverviewRow.height => GetHeightScreen(
                           onChange: (d) => data = d.toInt(),
                         ),
                       HealthOverviewRow.gender => SelectGenderScreen(

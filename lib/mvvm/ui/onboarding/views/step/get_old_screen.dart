@@ -2,15 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:fit_life/generated/l10n.dart';
 import 'package:fit_life/mvvm/ui/onboarding/views/widgets/onboarding_step_layout.dart';
 
-class GetOldStep extends StatefulWidget {
-  const GetOldStep({super.key});
+class GetOldScreen extends StatelessWidget {
+  final Function(DateTime? timePicker)? onDateTimeChanged;
+  final DateTime? initialDateTime;
 
-  @override
-  State<GetOldStep> createState() => _GetOldStepState();
-}
+  const GetOldScreen({
+    super.key,
+    this.onDateTimeChanged,
+    this.initialDateTime,
+  });
 
-class _GetOldStepState extends State<GetOldStep> {
-  DateTime? timePicker;
   @override
   Widget build(BuildContext context) {
     return OnboardingStepLayout(
@@ -26,9 +27,11 @@ class _GetOldStepState extends State<GetOldStep> {
                 minimumYear: DateTime.now().year - 100,
                 maximumYear: DateTime.now().year + 100,
                 onDateTimeChanged: (value) {
-                  timePicker = value;
+                  if (onDateTimeChanged != null) {
+                    onDateTimeChanged!(value);
+                  }
                 },
-                initialDateTime: DateTime(1990, 1, 1),
+                initialDateTime: initialDateTime ?? DateTime(1990, 1, 1),
               ),
             ),
           ),

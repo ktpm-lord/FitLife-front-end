@@ -34,7 +34,7 @@ class OnboardingStepLayout extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 30),
-        child ?? const SizedBox(),
+        if (child != null) child!,
       ],
     );
   }

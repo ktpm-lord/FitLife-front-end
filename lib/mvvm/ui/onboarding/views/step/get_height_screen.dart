@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:fit_life/core/components/extensions/context_extensions.dart';
 import 'package:fit_life/core/components/widgets/box_text.dart';
@@ -7,16 +9,41 @@ import 'package:fit_life/mvvm/ui/onboarding/views/widgets/onboarding_step_layout
 const _kDefaultValue = 100;
 const _kNumRender = 150;
 
-class GetHeightStep extends StatefulWidget {
+class GetHeightScreen extends StatefulWidget {
   final Function(int)? onChange;
-  const GetHeightStep({super.key, this.onChange});
+  final int? initHeight;
+
+  const GetHeightScreen({
+    super.key,
+    this.onChange,
+    this.initHeight,
+  });
 
   @override
-  State<GetHeightStep> createState() => _GetHeightStepState();
+  State<GetHeightScreen> createState() => _GetHeightStepState();
 }
 
-class _GetHeightStepState extends State<GetHeightStep> {
+class _GetHeightStepState extends State<GetHeightScreen> {
   int height = 100;
+  late FixedExtentScrollController scrollController;
+
+  @override
+  void initState() {
+    // set initial height
+    if (widget.initHeight != null) {
+      height = widget.initHeight!;
+    }
+    scrollController = FixedExtentScrollController(
+      initialItem: height - _kDefaultValue,
+    );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +69,15 @@ class _GetHeightStepState extends State<GetHeightStep> {
               ),
               itemExtent: 77,
               diameterRatio: 1.2,
-              onSelectedItemChanged: (int value) {
+              scrollController: scrollController,
+              onSelectedItemChanged: (int index) {
+                final value = index + _kDefaultValue;
                 if (widget.onChange != null) {
                   widget.onChange!(value);
+                  log('height: $value');
                 }
                 setState(() {
-                  height = value + _kDefaultValue;
+                  height = value;
                 });
               },
               children:

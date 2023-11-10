@@ -650,6 +650,26 @@ class S {
     );
   }
 
+  /// `Let's start`
+  String get letStart {
+    return Intl.message(
+      'Let\'s start',
+      name: 'letStart',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Previous`
+  String get previous {
+    return Intl.message(
+      'Previous',
+      name: 'previous',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Provide your height so that we can choose the most conform exercise for you. `
   String get heightDesc {
     return Intl.message(

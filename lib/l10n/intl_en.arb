@@ -60,6 +60,8 @@
     "worksEveryDayOfTheWeek": "Works every day of the week",
     "weightTargetDesc": "Provide your weight so that we can choose the most conform exercise for you. ",
     "weightTarget": "What is your weight target?",
+    "letStart": "Let's start",
+    "previous": "Previous",
     "heightDesc": "Provide your height so that we can choose the most conform exercise for you. ",
     "prompt1": "I'm just starting out with my fitness journey and would like a suitable workout plan based on my goals and fitness level. Can you help me create an effective fitness routine?",
     "prompt2": "I want to lose weight and improve my overall health. Can you provide guidance on the appropriate diet and exercise schedule to help me achieve this?",

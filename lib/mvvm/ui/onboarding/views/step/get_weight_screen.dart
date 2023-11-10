@@ -5,15 +5,26 @@ import 'package:fit_life/mvvm/ui/onboarding/views/widgets/onboarding_step_layout
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class GetWeightScreen extends StatefulWidget {
+  final int? initWeight;
   final Function(int)? onChange;
-  const GetWeightScreen({super.key, this.onChange});
+  const GetWeightScreen({
+    super.key,
+    this.onChange,
+    this.initWeight,
+  });
 
   @override
   State<GetWeightScreen> createState() => _GetWeightScreenState();
 }
 
 class _GetWeightScreenState extends State<GetWeightScreen> {
-  int weight = 50;
+  late int weight;
+
+  @override
+  void initState() {
+    weight = widget.initWeight ?? 50;
+    super.initState();
+  }
 
   Widget _buildItemList(BuildContext context, int index) {
     final fontColor =
@@ -73,7 +84,7 @@ class _GetWeightScreenState extends State<GetWeightScreen> {
           itemSize: 150,
           dynamicItemSize: true,
           itemCount: 150,
-          initialIndex: weight.toDouble(),
+          initialIndex: widget.initWeight?.toDouble(),
           onItemFocus: (int value) {
             if (widget.onChange != null) {
               widget.onChange!(value);

@@ -6,14 +6,26 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class GetWeightTargetScreen extends StatefulWidget {
   final Function(int)? onChange;
-  const GetWeightTargetScreen({super.key, this.onChange});
+  final int? initTarget;
+
+  const GetWeightTargetScreen({
+    super.key,
+    this.onChange,
+    this.initTarget,
+  });
 
   @override
   State<GetWeightTargetScreen> createState() => _GetWeightTargetScreenState();
 }
 
 class _GetWeightTargetScreenState extends State<GetWeightTargetScreen> {
-  int weight = 50;
+  late int weight;
+
+  @override
+  void initState() {
+    weight = widget.initTarget ?? 50;
+    super.initState();
+  }
 
   Widget _buildItemList(BuildContext context, int index) {
     final fontColor =

@@ -3,27 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:fit_life/core/components/widgets/text_field_icon.dart';
 import 'package:fit_life/generated/l10n.dart';
 import 'package:fit_life/mvvm/ui/onboarding/views/widgets/onboarding_step_layout.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../../core/components/extensions/context_extensions.dart';
 
-class FillYourProfileScreen extends StatefulWidget {
+class FillYourProfileScreen extends ConsumerStatefulWidget {
   final String? imageUrl;
-  const FillYourProfileScreen({super.key, this.imageUrl});
+  final TextEditingController fullNameCtrl;
+  final TextEditingController phoneCtrl;
+
+  const FillYourProfileScreen({
+    super.key,
+    this.imageUrl,
+    required this.fullNameCtrl,
+    required this.phoneCtrl,
+  });
 
   @override
-  State<FillYourProfileScreen> createState() => _FillYourProfileScreenState();
+  ConsumerState<FillYourProfileScreen> createState() =>
+      _FillYourProfileScreenState();
 }
 
-class _FillYourProfileScreenState extends State<FillYourProfileScreen> {
-  TextEditingController fullNameCtrl = TextEditingController();
-  TextEditingController phoneCtrl = TextEditingController();
-
-  @override
-  void dispose() {
-    fullNameCtrl.dispose();
-    phoneCtrl.dispose();
-    super.dispose();
-  }
-
+class _FillYourProfileScreenState extends ConsumerState<FillYourProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final widthDevice = context.widthDevice;
@@ -90,13 +90,13 @@ class _FillYourProfileScreenState extends State<FillYourProfileScreen> {
           const SizedBox(height: 30),
           TextFieldWithIconWidget(
             hintText: S.of(context).fullname,
-            controller: fullNameCtrl,
+            controller: widget.fullNameCtrl,
             icon: Icons.account_circle_rounded,
           ),
           const SizedBox(height: 20),
           TextFieldWithIconWidget(
             hintText: S.of(context).phoneNumber,
-            controller: phoneCtrl,
+            controller: widget.phoneCtrl,
             icon: Icons.phone,
           ),
         ],
