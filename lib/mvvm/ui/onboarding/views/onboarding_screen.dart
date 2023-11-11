@@ -12,17 +12,16 @@ import 'package:fit_life/mvvm/ui/onboarding/views/step/get_weight_target_screen.
 import 'package:fit_life/mvvm/ui/onboarding/views/step/select_duration_screen.dart';
 import 'package:fit_life/mvvm/ui/onboarding/views/step/select_gender_screen.dart';
 import 'package:fit_life/routes/routes.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:im_stepper/stepper.dart';
 
-class OnboardingScreen extends ConsumerStatefulWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
-  ConsumerState<OnboardingScreen> createState() => _OnboardingScreenState();
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
 }
 
-class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
+class _OnboardingScreenState extends State<OnboardingScreen> {
   int activeStep = 0;
   int upperBound = 6;
 

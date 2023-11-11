@@ -29,7 +29,6 @@ class _GetHeightStepState extends State<GetHeightScreen> {
 
   @override
   void initState() {
-    // set initial height
     if (widget.initHeight != null) {
       height = widget.initHeight!;
     }

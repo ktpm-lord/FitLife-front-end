@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:fit_life/core/components/widgets/text_field_icon.dart';
 import 'package:fit_life/generated/l10n.dart';
 import 'package:fit_life/mvvm/ui/onboarding/views/widgets/onboarding_step_layout.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../../../core/components/extensions/context_extensions.dart';
 
-class FillYourProfileScreen extends ConsumerStatefulWidget {
+class FillYourProfileScreen extends StatefulWidget {
   final String? imageUrl;
   final TextEditingController fullNameCtrl;
   final TextEditingController phoneCtrl;
@@ -19,11 +18,10 @@ class FillYourProfileScreen extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<FillYourProfileScreen> createState() =>
-      _FillYourProfileScreenState();
+  State<FillYourProfileScreen> createState() => _FillYourProfileScreenState();
 }
 
-class _FillYourProfileScreenState extends ConsumerState<FillYourProfileScreen> {
+class _FillYourProfileScreenState extends State<FillYourProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final widthDevice = context.widthDevice;
