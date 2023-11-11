@@ -1,11 +1,6 @@
-import 'dart:developer';
-
 import 'package:collection/collection.dart';
 import 'package:fit_life/app_coordinator.dart';
 import 'package:fit_life/core/components/widgets/button_custom.dart';
-import 'package:fit_life/mvvm/ui/onboarding/view_model/onboarding_data.dart';
-import 'package:fit_life/mvvm/ui/onboarding/view_model/onboarding_model.dart';
-import 'package:fit_life/mvvm/ui/onboarding/view_model/onboarding_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fit_life/core/components/extensions/context_extensions.dart';
 import 'package:fit_life/generated/l10n.dart';
@@ -28,10 +23,6 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 }
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
-  OnboardingViewModel get _vm => ref.read(onboardingStateNotifier.notifier);
-  OnboardingData get data => ref.watch(onboardingStateNotifier).data;
-  OnboardingModel get onboardingModel => data.onboardingModel;
-
   int activeStep = 0;
   int upperBound = 6;
 
@@ -43,13 +34,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   int weight = 50;
   int duration = 0;
   int target = 50;
-
-  @override
-  void initState() {
-    super.initState();
-    fullNameCtrl.text = _vm.state.data.onboardingModel.fullname ?? "";
-    phoneCtrl.text = _vm.state.data.onboardingModel.fullname ?? "";
-  }
 
   @override
   void dispose() {
@@ -64,22 +48,6 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
         activeStep++;
       });
     } else {
-      // _vm.updateData(
-      //   OnboardingData(
-      //     onboardingModel: OnboardingModel(
-      //       duration: duration,
-      //       fullname: fullNameCtrl.text,
-      //       height: height.toDouble(),
-      //       isMale: isMale,
-      //       phoneNumber: phoneCtrl.text,
-      //       weight: weight.toDouble(),
-      //       weightTarget: target.toDouble(),
-      //       birthday: birthday,
-      //     ),
-      //   ),
-      // );
-      // _vm.updateUserInformation();
-
       context.openListPageWithRoute(Routes.dashboard);
     }
   }
