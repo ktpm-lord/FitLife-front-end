@@ -41,6 +41,7 @@ class PlanRepositoriesImpl extends BaseApi implements PlanRepositories {
     required DateTime timeFinish,
     required int currentPage,
   }) async {
+    Future.delayed(const Duration(seconds: 3));
     return Either.right([
       ...List.generate(
         5,

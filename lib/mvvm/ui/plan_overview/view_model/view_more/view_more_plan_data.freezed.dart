@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ViewMorePlanData {
+  String? get searchContent => throw _privateConstructorUsedError;
   DateTime? get startDate => throw _privateConstructorUsedError;
   DateTime? get endDate => throw _privateConstructorUsedError;
   Pagination<WorkoutPlan> get workoutPlans =>
@@ -33,9 +34,12 @@ abstract class $ViewMorePlanDataCopyWith<$Res> {
       _$ViewMorePlanDataCopyWithImpl<$Res, ViewMorePlanData>;
   @useResult
   $Res call(
-      {DateTime? startDate,
+      {String? searchContent,
+      DateTime? startDate,
       DateTime? endDate,
       Pagination<WorkoutPlan> workoutPlans});
+
+  $PaginationCopyWith<WorkoutPlan, $Res> get workoutPlans;
 }
 
 /// @nodoc
@@ -51,11 +55,16 @@ class _$ViewMorePlanDataCopyWithImpl<$Res, $Val extends ViewMorePlanData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? searchContent = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? workoutPlans = null,
   }) {
     return _then(_value.copyWith(
+      searchContent: freezed == searchContent
+          ? _value.searchContent
+          : searchContent // ignore: cast_nullable_to_non_nullable
+              as String?,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -70,6 +79,14 @@ class _$ViewMorePlanDataCopyWithImpl<$Res, $Val extends ViewMorePlanData>
               as Pagination<WorkoutPlan>,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PaginationCopyWith<WorkoutPlan, $Res> get workoutPlans {
+    return $PaginationCopyWith<WorkoutPlan, $Res>(_value.workoutPlans, (value) {
+      return _then(_value.copyWith(workoutPlans: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -81,9 +98,13 @@ abstract class _$$_ViewMorePlanDataCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {DateTime? startDate,
+      {String? searchContent,
+      DateTime? startDate,
       DateTime? endDate,
       Pagination<WorkoutPlan> workoutPlans});
+
+  @override
+  $PaginationCopyWith<WorkoutPlan, $Res> get workoutPlans;
 }
 
 /// @nodoc
@@ -97,11 +118,16 @@ class __$$_ViewMorePlanDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? searchContent = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
     Object? workoutPlans = null,
   }) {
     return _then(_$_ViewMorePlanData(
+      searchContent: freezed == searchContent
+          ? _value.searchContent
+          : searchContent // ignore: cast_nullable_to_non_nullable
+              as String?,
       startDate: freezed == startDate
           ? _value.startDate
           : startDate // ignore: cast_nullable_to_non_nullable
@@ -122,8 +148,13 @@ class __$$_ViewMorePlanDataCopyWithImpl<$Res>
 
 class _$_ViewMorePlanData implements _ViewMorePlanData {
   const _$_ViewMorePlanData(
-      {this.startDate, this.endDate, required this.workoutPlans});
+      {this.searchContent,
+      this.startDate,
+      this.endDate,
+      required this.workoutPlans});
 
+  @override
+  final String? searchContent;
   @override
   final DateTime? startDate;
   @override
@@ -133,7 +164,7 @@ class _$_ViewMorePlanData implements _ViewMorePlanData {
 
   @override
   String toString() {
-    return 'ViewMorePlanData(startDate: $startDate, endDate: $endDate, workoutPlans: $workoutPlans)';
+    return 'ViewMorePlanData(searchContent: $searchContent, startDate: $startDate, endDate: $endDate, workoutPlans: $workoutPlans)';
   }
 
   @override
@@ -141,6 +172,8 @@ class _$_ViewMorePlanData implements _ViewMorePlanData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ViewMorePlanData &&
+            (identical(other.searchContent, searchContent) ||
+                other.searchContent == searchContent) &&
             (identical(other.startDate, startDate) ||
                 other.startDate == startDate) &&
             (identical(other.endDate, endDate) || other.endDate == endDate) &&
@@ -150,7 +183,7 @@ class _$_ViewMorePlanData implements _ViewMorePlanData {
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, startDate, endDate, workoutPlans);
+      Object.hash(runtimeType, searchContent, startDate, endDate, workoutPlans);
 
   @JsonKey(ignore: true)
   @override
@@ -161,11 +194,14 @@ class _$_ViewMorePlanData implements _ViewMorePlanData {
 
 abstract class _ViewMorePlanData implements ViewMorePlanData {
   const factory _ViewMorePlanData(
-          {final DateTime? startDate,
+          {final String? searchContent,
+          final DateTime? startDate,
           final DateTime? endDate,
           required final Pagination<WorkoutPlan> workoutPlans}) =
       _$_ViewMorePlanData;
 
+  @override
+  String? get searchContent;
   @override
   DateTime? get startDate;
   @override

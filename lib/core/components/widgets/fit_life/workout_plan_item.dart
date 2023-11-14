@@ -129,7 +129,7 @@ class WorkoutPlanItemWidget extends StatelessWidget {
             radius: 20.0,
             percent: 0.5,
             center: Text(
-              (progress * 100).toStringAsFixed(1),
+              '${(progress * 100).toStringAsFixed(0)}%',
               style: context.titleSmall
                   .copyWith(fontWeight: FontWeight.w500, fontSize: 10.0),
             ),

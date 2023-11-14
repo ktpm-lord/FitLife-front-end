@@ -7,6 +7,7 @@ part 'view_more_plan_data.freezed.dart';
 @freezed
 class ViewMorePlanData with _$ViewMorePlanData {
   const factory ViewMorePlanData({
+    String? searchContent,
     DateTime? startDate,
     DateTime? endDate,
     required Pagination<WorkoutPlan> workoutPlans,

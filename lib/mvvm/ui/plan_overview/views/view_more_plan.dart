@@ -13,6 +13,8 @@ import 'package:fit_life/mvvm/ui/plan_overview/view_model/view_more/view_more_pl
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+
 
 class ViewMorePlan extends ConsumerStatefulWidget {
   const ViewMorePlan({super.key});
@@ -102,15 +104,6 @@ class _ViewMorePlanState extends ConsumerState<ViewMorePlan> with AuthMixin {
                     context.titleMedium.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
-            const SizedBox(height: 5.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Text(
-                "You have 3 session plan (3 plans was completed)",
-                style: context.titleSmall.copyWith(
-                    color: Theme.of(context).hintColor, fontSize: 12.0),
-              ),
-            ),
             const SizedBox(height: 10.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -144,24 +137,16 @@ class _ViewMorePlanState extends ConsumerState<ViewMorePlan> with AuthMixin {
             ),
             const Divider(),
             const SizedBox(height: 5.0),
-            // if (_state.loading)
-            //   Expanded(
-            //     child: ListView(
-            //       children: [
-            //         ...List.generate(5, (index) => const WorkoutPlanSkelton())
-            //       ],
-            //     ),
-            //   )
-            // else if (_items?.isNotEmpty ?? false)
-            //   // Expanded(
-            //   //   child: ListView.builder(
-            //   //     itemCount: _items?.length ?? 0,
-            //   //     itemBuilder: (_, index) => WorkoutPlanItemWidget(
-            //   //       progress: 0.6,
-            //   //       workoutPlan: _items![index],
-            //   //     ),
-            //   //   ),
-            //   // )
+            if (!_state.loading)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Text(
+                  "You have ${_items?.length ?? 0} session plan (${_items?.length ?? 0} plans was completed)",
+                  style: context.titleSmall.copyWith(
+                      color: Theme.of(context).hintColor, fontSize: 12.0),
+                ),
+              ),
+            const SizedBox(height: 5.0),
             Expanded(
               child: DefaultPagination(
                 items: _items ?? const [],
@@ -188,11 +173,13 @@ class _ViewMorePlanState extends ConsumerState<ViewMorePlan> with AuthMixin {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(ImageConst.searchIcon,
-                  // ignore: deprecated_member_use
-                  width: 22,
-                  height: 22,
-                  color: context.titleLarge.color),
+              SvgPicture.asset(
+                ImageConst.searchIcon,
+                width: 22,
+                height: 22,
+                // ignore: deprecated_member_use
+                color: context.titleLarge.color,
+              ),
             ],
           ),
         ),
@@ -206,7 +193,13 @@ class _ViewMorePlanState extends ConsumerState<ViewMorePlan> with AuthMixin {
       keyboardType: TextInputType.emailAddress,
       maxLines: 1,
       style: context.titleSmall,
-      onChanged: (text) {},
+      onChanged: (text) {
+        EasyDebounce.debounce(
+          'search',
+          const Duration(milliseconds: 500),
+          () => _vm.getSessionPlanHistory(content: text),
+        );
+      },
       textInputAction: TextInputAction.next,
       onSubmitted: (_) {},
     );

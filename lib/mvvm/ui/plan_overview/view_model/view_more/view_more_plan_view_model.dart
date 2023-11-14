@@ -38,7 +38,7 @@ class ViewMorePlanViewModel extends StateNotifier<ViewMorePlanState> {
   // ViewMorePlanViewModel(super.state);
   ViewMorePlanViewModel()
       : super(
-          _Initial(
+          const _Initial(
               data: ViewMorePlanData(
                   workoutPlans: Pagination<WorkoutPlan>(items: []))),
         );
@@ -46,25 +46,43 @@ class ViewMorePlanViewModel extends StateNotifier<ViewMorePlanState> {
   ViewMorePlanData get data => state.data;
 
   Future<void> getSessionPlanHistory({required String content}) async {
-    state = _Loading(data: data);
-    await Future.delayed(const Duration(seconds: 3));
+    final isNewSearch = data.searchContent != content;
+    if (state is _Loading && isNewSearch) return;
+    final currentPage = isNewSearch ? 0 : data.workoutPlans.currentPage;
+
+    state = _Loading(
+      data: data.copyWith(
+        workoutPlans: isNewSearch
+            ? data.workoutPlans.copyWith(
+                items: [],
+                currentPage: currentPage,
+              )
+            : data.workoutPlans,
+      ),
+    );
+
     final response = await _planRepositories.fetchPlanByFilter(
       content: content,
       timeStart: data.startDate ?? DateTime.now(),
       timeFinish: data.endDate ?? DateTime.now(),
       currentPage: data.workoutPlans.currentPage,
     );
-
-    state = response.fold(
-      ifLeft: (error) => _GetItemFailed(data: data, message: error.message),
-      ifRight: (rData) => _GetItemSuccess(
+    Future.delayed(const Duration(seconds: 3), () {
+      state = response.fold(
+        ifLeft: (error) => _GetItemFailed(data: data, message: error.message),
+        ifRight: (rData) => _GetItemSuccess(
           data: data.copyWith(
-              workoutPlans: Pagination(
-        items: [...data.workoutPlans.items, ...rData],
-        currentPage: data.workoutPlans.currentPage + 1,
-        totalPage: data.workoutPlans.totalPage,
-      ))),
-    );
+            workoutPlans: Pagination(
+              items:
+                  isNewSearch ? rData : [...data.workoutPlans.items, ...rData],
+              currentPage: currentPage + 1,
+              totalPage: data.workoutPlans.totalPage,
+            ),
+            searchContent: content,
+          ),
+        ),
+      );
+    });
   }
 
   void selectRangeTime(
@@ -72,6 +90,4 @@ class ViewMorePlanViewModel extends StateNotifier<ViewMorePlanState> {
     state = _SelectDateSuccess(
         data: data.copyWith(startDate: startTime, endDate: endTime));
   }
-
-  Future<void> searchPlan() async {}
 }
